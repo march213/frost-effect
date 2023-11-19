@@ -1,12 +1,18 @@
 import './style.css';
 import GlslCanvas from 'glslCanvas';
+import fragString from './shader.frag?raw';
 
-const canvas = document.createElement('canvas');
-const sandbox = new GlslCanvas(canvas);
+const canvases = document.querySelectorAll('canvas');
 
-document.body.appendChild(canvas);
+canvases.forEach((canvas, index) => {
+  const sandbox = new GlslCanvas(canvas);
+  sandbox.load(fragString);
+  sandbox.setUniform('u_texture', `./public/image${index + 1}.jpg`);
 
-const sizer = function () {
+  sizer(canvas);
+});
+
+function sizer(canvas) {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
   const dpi = window.devicePixelRatio || 1;
@@ -17,9 +23,6 @@ const sizer = function () {
   canvas.height = s * dpi;
   canvas.style.width = `${s}px`;
   canvas.style.height = `${s}px`;
-};
+}
 
-sizer();
 window.addEventListener('resize', sizer);
-
-sandbox.load(fragString);
