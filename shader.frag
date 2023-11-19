@@ -5,6 +5,7 @@ precision highp float;
 uniform float u_time;
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
+uniform float u_seed;
 
 uniform sampler2D u_texture;
 
@@ -53,8 +54,8 @@ void main() {
     float y = floor(uv.y * blocks) / blocks;
     
     vec2 distortion = 0.1 * vec2(
-        sin(u_time * 0.5 + x * 1.0 + y * 1.5 + mouse.x),
-        cos(u_time * 0.2 + x * 1.1 + y * 2.0)
+        sin(u_time * 0.5 + x * 1.0 + y * 1.5 + mouse.x + u_seed),
+        cos(u_time * 0.2 + x * 1.1 + y * 2.0 + mouse.y + u_seed)
     );
 
     vec4 texture = texture2D(u_texture, coords + distortion);

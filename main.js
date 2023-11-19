@@ -8,21 +8,20 @@ canvases.forEach((canvas, index) => {
   const sandbox = new GlslCanvas(canvas);
   sandbox.load(fragString);
   sandbox.setUniform('u_texture', `./public/image${index + 1}.jpg`);
+  sandbox.setUniform('u_seed', Math.random());
 
   sizer(canvas);
 });
 
 function sizer(canvas) {
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
+  const w = canvas.parentNode.clientWidth;
+  const h = canvas.parentNode.clientHeight;
   const dpi = window.devicePixelRatio || 1;
 
-  const s = Math.max(vw, vh);
-
-  canvas.width = s * dpi;
-  canvas.height = s * dpi;
-  canvas.style.width = `${s}px`;
-  canvas.style.height = `${s}px`;
+  canvas.width = w * dpi;
+  canvas.height = h * dpi;
+  canvas.style.width = `${w}px`;
+  canvas.style.height = `${h}px`;
 }
 
 window.addEventListener('resize', sizer);
