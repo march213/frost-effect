@@ -7,7 +7,7 @@ const canvases = document.querySelectorAll('canvas');
 canvases.forEach((canvas, index) => {
   const sandbox = new GlslCanvas(canvas);
   sandbox.load(fragString);
-  sandbox.setUniform('u_texture', `./public/image${index + 1}.jpg`);
+  sandbox.setUniform('u_texture', `image${index + 1}.jpg`);
   sandbox.setUniform('u_seed', Math.random());
 
   sizer(canvas);

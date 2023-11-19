@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Karrik';
-  src: url(./karrik-regular.woff2);
+  src: url('./karrik-regular.woff2');
 }
 
 body {
